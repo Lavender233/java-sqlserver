@@ -1,0 +1,21 @@
+/**
+Java中的Date Time与SQLserver 2008里的Datetime之间的交互
+java.util.Date() create 的instance 是不能直接让JDBC存到DB的，它会出现如下的Exception:
+Conversion failed when converting datetime from character string.
+要将java.util.Date()存到DB必须经过type conversion 成为sql下的Date,Time或Timestamp.
+*/
+java.util.Date Date = new java.util.Date();
+/*java.util.Date将date存到DB
+*/
+Date date = new Date(Date.getTime());
+String sql = String.format("insert into PacsResult_c13(examdatetime) values('"+date+"')");
+
+/*java.sql.Time将time存到DB
+*/
+Time time = new Time(Date.getTime());
+String sql = String.format("insert into PacsResult_c13(examdatetime) values('"+time+"')");
+
+/*java.sql.Timestamp将date与time都存到DB
+*/
+Timestamp timeStamp = new Timestamp(Date.getTime();
+String sql = String.format("insert into PacsResult_c13(examdatetime) values('"+timeStamp+"')");
